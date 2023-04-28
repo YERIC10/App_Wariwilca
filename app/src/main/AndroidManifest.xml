@@ -12,7 +12,7 @@
         android:theme="@style/Theme.App_Wariwilca"
         tools:targetApi="31">
         <activity
-            android:name=".V_Splash"
+            android:name=".Vista.V_Splash"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
