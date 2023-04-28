@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -48,10 +49,14 @@ public class HomeFragment extends Fragment {
     }
 
     public void Cargar_Plano(){
-        progressBar.setMax(100);
 
-        Glide.with(this).
-                load("https://firebasestorage.googleapis.com/v0/b/app-warivilca.appspot.com/o/Plano%2Fplano.jpg?alt=media&token=7c96d721-ee63-4884-a48f-d90483ef4261")
-                .into(img_plano);
+        if(img_plano != null){
+            Glide.with(this).
+                    load("https://firebasestorage.googleapis.com/v0/b/app-warivilca.appspot.com/o/Plano%2Fplano.jpg?alt=media&token=7c96d721-ee63-4884-a48f-d90483ef4261")
+                    .into(img_plano);
+        }else {
+            Toast.makeText(getContext(), "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
+        }
+        progressBar.setVisibility(View.GONE);
     }
 }
