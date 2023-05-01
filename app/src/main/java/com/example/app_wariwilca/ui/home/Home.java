@@ -1,9 +1,11 @@
-package com.example.app_wariwilca.Modelo;
+package com.example.app_wariwilca.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -15,20 +17,18 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.app_wariwilca.R;
 import com.example.app_wariwilca.databinding.FragmentHomeBinding;
-import com.example.app_wariwilca.Vista.HomeViewModel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class HomeFragment extends Fragment {
-
-    private FragmentHomeBinding binding;
+public class Home extends Fragment {
     ImageView img_plano;
     StorageReference storageReference;
     ProgressBar progressBar;
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    ImageButton btn_izq;
+    private FragmentHomeBinding binding;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        HomeView homeView =
+                new ViewModelProvider(this).get(HomeView.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
         img_plano = root.findViewById(R.id.img_mapa);
         progressBar = root.findViewById(R.id.progree_imgPlano);
+        btn_izq = root.findViewById(R.id.btn_Izquierda);
+        btn_izq.setOnClickListener(this::onClick);
 
         Cargar_Plano();
 
@@ -48,6 +50,17 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
+    private void onClick(View view) {
+
+        /*switch (view.getId()){
+            case R.id.btn_Izquierda:
+                startActivity(new Intent(getActivity(), DatosMuseo.class));
+                break;
+            default:
+                break;
+        }*/
+
+    }
     public void Cargar_Plano(){
 
         if(img_plano != null){

@@ -13,11 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_Wariwilca"
         tools:targetApi="31">
+
         <activity
-            android:name=".Vista.V_Inrformacion_Museo"
-            android:exported="false" />
-        <activity
-            android:name=".Modelo.M_Splash"
+            android:name="com.example.app_wariwilca.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
