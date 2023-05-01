@@ -1,4 +1,4 @@
-package com.example.app_wariwilca.Vista;
+package com.example.app_wariwilca.Modelo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import com.example.app_wariwilca.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class V_Splash extends AppCompatActivity {
+public class M_Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class V_Splash extends AppCompatActivity {
         TimerTask carga = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(V_Splash.this, MainActivity.class);
+                Intent intent = new Intent(M_Splash.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
