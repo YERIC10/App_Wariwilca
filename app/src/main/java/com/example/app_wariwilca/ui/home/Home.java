@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.example.app_wariwilca.DatoMuseo;
 import com.example.app_wariwilca.R;
 import com.example.app_wariwilca.databinding.FragmentHomeBinding;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,30 +37,24 @@ public class Home extends Fragment {
         img_plano = root.findViewById(R.id.img_mapa);
         progressBar = root.findViewById(R.id.progree_imgPlano);
         btn_izq = root.findViewById(R.id.btn_Izquierda);
-        btn_izq.setOnClickListener(this::onClick);
+        btn_izq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DatoMuseo.class);
+                startActivity(i);
+            }
+        });
 
         Cargar_Plano();
 
         return root;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    private void onClick(View view) {
-
-        /*switch (view.getId()){
-            case R.id.btn_Izquierda:
-                startActivity(new Intent(getActivity(), DatosMuseo.class));
-                break;
-            default:
-                break;
-        }*/
-
-    }
     public void Cargar_Plano(){
 
         if(img_plano != null){
