@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.wariwilca_app.com.example.app_wariwilca.Splash">
+    tools:context="com.example.app_wariwilca.Splash">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -22,7 +22,6 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
