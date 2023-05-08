@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-        /* INTANCIA A CONECTARME CON GOOGLE */
+        /* INSTANCIA PARA CONECTARME CON GOOGLE */
 
         //LLAMA A LOS MENUS POR MEDIO DE SUS ID
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -180,10 +180,10 @@ public class MainActivity extends AppCompatActivity {
         imageView.setVisibility(View.VISIBLE);
 
         // EMAIL
-        Global.usuarioEmail  = user.getDisplayName();
+        Global.usuarioEmail  = user.getEmail();
         TextView email = findViewById(R.id.txt_EmailUsuario);
-        name.setText(Global.usuarioEmail);
-        name.setVisibility(View.VISIBLE);
+        email.setVisibility(View.VISIBLE);
+        email.setText(Global.usuarioEmail);
 
     }
 

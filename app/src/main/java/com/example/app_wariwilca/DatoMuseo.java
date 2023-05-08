@@ -1,6 +1,7 @@
 package com.example.app_wariwilca;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.app_wariwilca.ui.home.Home;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,6 +22,8 @@ public class DatoMuseo extends AppCompatActivity {
     TextView txtNombreObjeto;
     Button bntDescargarQr;
 
+    //  VARIABLE PARA OBTENER EL URL DE LA IMAGEN DEL OBJETO DE LA CLASE 'HOME'
+    String imgObjeto, informObjeto;
     FirebaseFirestore firestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +38,13 @@ public class DatoMuseo extends AppCompatActivity {
         bntDescargarQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Invocamos para descargar la imagen Qr
             }
         });
 
+        Intent i = getIntent();
+        imgObjeto = i.getStringExtra(Home.IMGOBJETO);
+        informObjeto = i.getStringExtra(Home.INFORMACION_OBJETO);
 
         firestore = FirebaseFirestore.getInstance();
         Cargar_Datos();
@@ -47,17 +54,17 @@ public class DatoMuseo extends AppCompatActivity {
 
         // Obtenemos la imagen desde Firebase usando Glide
         if(imgObjetoMuseo != null){
-            Glide.with(this).
-                    load("https://firebasestorage.googleapis.com/v0/b/app-warivilca.appspot.com/o/Objetos_Museo%2FObjeto_1.jpg?alt=media&token=5ecbaf25-244b-450c-a658-4b34689e8d6e")
+            Glide.with(this)
+                    .load(imgObjeto)
                     .into(imgObjetoMuseo);
 
         }else {
             Toast.makeText(this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
         }
 
-        // Obtenemos datos de Firebase de la coleccion "Informacion_Objetos" del campo "Descripcion"
+        // Obtenemos datos de Firebase de la coleccion "Informacion_Objetos" del campo "Descripcion" y "Nombre"
 
-        firestore.collection("Informacion_Objetos").document("bFsOVLfbBbr03ZBmfZOY").
+        firestore.collection("Informacion_Objetos").document(informObjeto).
                 get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -71,7 +78,5 @@ public class DatoMuseo extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 }

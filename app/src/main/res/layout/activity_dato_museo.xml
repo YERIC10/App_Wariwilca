@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/img_objetomuseo"
-        android:layout_width="151dp"
-        android:layout_height="132dp"
+        android:layout_width="229dp"
+        android:layout_height="161dp"
         android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,12 +17,16 @@
 
     </ImageView>
 
+
     <TextView
         android:id="@+id/txt_NombreObjeto"
-        android:layout_width="212dp"
-        android:layout_height="47dp"
+        android:layout_width="183dp"
+        android:layout_height="35dp"
         android:layout_marginTop="32dp"
+        android:gravity="center"
         android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +36,14 @@
 
     <TextView
         android:id="@+id/txt_DescripOjeto"
-        android:layout_width="309dp"
-        android:layout_height="144dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="304dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_NombreObjeto">
 
@@ -46,9 +53,8 @@
         android:id="@+id/img_qr_objeto"
         android:layout_width="123dp"
         android:layout_height="108dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_DescripOjeto">
 
@@ -56,9 +62,10 @@
 
     <Button
         android:id="@+id/btn_decargar_qr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descargar"
+        android:layout_width="49dp"
+        android:layout_height="36dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_descarga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

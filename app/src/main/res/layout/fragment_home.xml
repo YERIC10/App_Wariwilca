@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.Home">
 
-
+    <!-- CARGADOR DE IMAGEN -->
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,40 +18,166 @@
 
     </ProgressBar>
 
+    <!-- IMAGEN DE FIREBASE -->
+
+    <!-- BOTONES DE LADO DERECHO -->
+
     <ImageView
         android:id="@+id/img_mapa"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:src="@drawable/plano"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
     </ImageView>
 
     <ImageButton
-        android:id="@+id/btn_Izquierda"
-        android:layout_width="141dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="80dp"
+        android:id="@+id/btn_DerEnd"
+        android:layout_width="84dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="492dp"
         android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
         android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/btn_CentroEnd"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
+    <!-- BOTONES DE LADO IZQUIERDA -->
+
+    <!-- BOTONES DEL CENTRO -->
+
+    <ImageButton
+        android:id="@+id/btn_DerTop"
+        android:layout_width="79dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="128dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toEndOf="@+id/btn_CentroTop"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btn_DerCentro"
+        android:layout_width="79dp"
+        android:layout_height="160dp"
+        android:layout_marginEnd="80dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/btn_DerEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_DerTop"
+        app:layout_constraintVertical_bias="0.866">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btn_IzqCentro"
+        android:layout_width="76dp"
+        android:layout_height="172dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_IzqTop">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btn_IzqTop"
+        android:layout_width="60dp"
+        android:layout_height="188dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="124dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageButton>
 
-    <Button
-        android:id="@+id/LOGIN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOGIN"
-        app:layout_constraintBottom_toTopOf="@+id/progree_imgPlano"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageButton
+        android:id="@+id/btn_IzqEnd"
+        android:layout_width="76dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="528dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Izquierda">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </Button>
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btn_CentroTop"
+        android:layout_width="96dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="128dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/btn_IzqTop"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btn_Centro"
+        android:layout_width="93dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="324dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/btn_DerCentro"
+        app:layout_constraintHorizontal_bias="0.312"
+        app:layout_constraintStart_toEndOf="@+id/btn_IzqCentro"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btn_CentroEnd"
+        android:layout_width="98dp"
+        android:layout_height="139dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="512dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/btn_IzqEnd"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
