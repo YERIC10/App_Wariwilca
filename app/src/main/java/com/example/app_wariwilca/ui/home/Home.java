@@ -73,14 +73,7 @@ public class Home extends Fragment implements View.OnClickListener {
         btnCentroEnd = root.findViewById(R.id.btn_CentroEnd);   btnCentroEnd.setOnClickListener(this);
         btnCentro = root.findViewById(R.id.btn_Centro);         btnCentro.setOnClickListener(this);
 
-
-        // INTANCIA A CONECTARME CON GOOGLE
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail().build();
-
         Cargar_Plano();
-
         return root;
     }
 
@@ -93,7 +86,8 @@ public class Home extends Fragment implements View.OnClickListener {
 
         if(img_plano != null){
             Glide.with(this).
-                    load("https://firebasestorage.googleapis.com/v0/b/app-warivilca.appspot.com/o/Plano%2Fplano.jpg?alt=media&token=7c96d721-ee63-4884-a48f-d90483ef4261")
+                    load(
+                   "https://firebasestorage.googleapis.com/v0/b/app-warivilca.appspot.com/o/Plano%2Fplano.jpg?alt=media&token=7c96d721-ee63-4884-a48f-d90483ef4261")
                     .into(img_plano);
         }else {
             Toast.makeText(getContext(), "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();

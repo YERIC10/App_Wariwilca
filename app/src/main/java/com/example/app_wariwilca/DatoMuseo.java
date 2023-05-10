@@ -57,13 +57,9 @@ public class DatoMuseo extends AppCompatActivity {
             Glide.with(this)
                     .load(imgObjeto)
                     .into(imgObjetoMuseo);
-
-        }else {
-            Toast.makeText(this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
-        }
+        }else { Toast.makeText(this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();   }
 
         // Obtenemos datos de Firebase de la coleccion "Informacion_Objetos" del campo "Descripcion" y "Nombre"
-
         firestore.collection("Informacion_Objetos").document(informObjeto).
                 get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override

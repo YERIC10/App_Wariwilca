@@ -1,5 +1,6 @@
 package com.example.app_wariwilca;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -46,14 +47,12 @@ import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     int RC_SIGN_IN = 1;
     String TAG = "GoogleSignIn";
     private FirebaseAuth firebaseAuth;
     private GoogleSignInClient googleSignInClient;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-        /* INSTANCIA PARA CONECTARME CON GOOGLE */
-
         //LLAMA A LOS MENUS POR MEDIO DE SUS ID
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)
@@ -84,29 +81,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN){
-
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if (task.isSuccessful()){
-                try {
-                    GoogleSignInAccount account =  task.getResult(ApiException.class);
-                    Log.d(TAG, "firebaseAuthWithGoogle: "+ account.getId());
-                    firebaseAuthWithGoogle(account.getIdToken());
-                }catch (ApiException e){
-                    Log.w(TAG, "Google sing in failed", e);
-                }
-            }else{
-                    Log.d(TAG, "Error, login no exitoso: "+task.getException().toString());
-                Toast.makeText(this, "Ocurrio un Error."+task.getException().toString(),Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     @Override
     public boolean onSupportNavigateUp() {
 
@@ -122,11 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-    public void singIn(){
-        Intent singintent = googleSignInClient.getSignInIntent();
-        startActivityForResult(singintent, RC_SIGN_IN);
+    private void ShowDialogFragment() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("¡BIENVENIDO!")
+                .setNegativeButton("Cancel", (dialog, which) ->{dialog.dismiss();})
+                .setPositiveButton("Iniciar Sesion", (dialog, which) ->{dialog.dismiss();singIn();})
+                .show();
     }
-
+        // Integramos el acceso con Google a la app
     private void initGoogleSignIn(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("945572842216-rf20ibbhi6g6b9sfk33rfibn12qbadc7.apps.googleusercontent.com")
@@ -135,14 +112,29 @@ public class MainActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         firebaseAuth = FirebaseAuth.getInstance();
     }
-    private void ShowDialogFragment() {
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("¡BIENVENIDO!")
-                .setNegativeButton("Cancel", (dialog, which) ->{dialog.dismiss();})
-                .setPositiveButton("Iniciar Sesion", (dialog, which) ->{dialog.dismiss();singIn();})
-                .show();
+    public void singIn(){
+        Intent singintent = googleSignInClient.getSignInIntent();
+        startActivityForResult(singintent, RC_SIGN_IN);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN){
+
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            try {
+                GoogleSignInAccount account =  task.getResult(ApiException.class);
+                Log.d(TAG, "firebaseAuthWithGoogle: "+ account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+            }catch (ApiException e){
+                Log.w(TAG, "Google sing in failed", e);
+            }
+        }
     }
 
+    //intercambiamos las credenciales de Firebase y usarla para la autenticación
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -152,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "signInWithCredential:success");
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     gamesGetUserInfo(user);
+                    Toast.makeText(getBaseContext(),"ACCESO",Toast.LENGTH_SHORT).show();
                 }else{
                     Log.w(TAG, "signInWithCredential:failure", task.getException());
                 }
@@ -164,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         public static Uri usuarioImg;
         public static String usuarioEmail;
     }
-
     private void gamesGetUserInfo(FirebaseUser user){
 
         // NOMBRE USUARIO
@@ -184,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.txt_EmailUsuario);
         email.setVisibility(View.VISIBLE);
         email.setText(Global.usuarioEmail);
-
     }
 
     @Override
