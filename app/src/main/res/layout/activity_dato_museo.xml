@@ -4,27 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Modelo.M_Informacion_Museo">
+    tools:context=".DatoMuseo">
 
     <ImageView
         android:id="@+id/img_objetomuseo"
-        android:layout_width="123dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="229dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
 
+
     <TextView
-        android:id="@+id/txt_infoobjeto"
-        android:layout_width="283dp"
-        android:layout_height="213dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/txt_NombreObjeto"
+        android:layout_width="183dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_objetomuseo">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txt_DescripOjeto"
+        android:layout_width="304dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_NombreObjeto">
 
     </TextView>
 
@@ -32,18 +53,19 @@
         android:id="@+id/img_qr_objeto"
         android:layout_width="123dp"
         android:layout_height="108dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_infoobjeto">
+        app:layout_constraintTop_toBottomOf="@+id/txt_DescripOjeto">
 
     </ImageView>
 
     <Button
         android:id="@+id/btn_decargar_qr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descargar"
+        android:layout_width="49dp"
+        android:layout_height="36dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_descarga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -1,4 +1,4 @@
-package com.example.app_wariwilca.Modelo;
+package com.example.app_wariwilca;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,20 +11,20 @@ import com.example.app_wariwilca.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class M_Splash extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Llama al layout activity -> El diseño Interfaz del Splash
-        setContentView(R.layout.activity_vsplash);
+        setContentView(R.layout.activity_splash);
 
          Timer tiempo;
         TimerTask carga = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(M_Splash.this, MainActivity.class);
+                Intent intent = new Intent(Splash.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

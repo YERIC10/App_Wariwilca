@@ -3,17 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_home"
-            android:title="@string/menu_home" />
-    </group>
+    <item android:title="Inicio">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/ic_menu_home"
+                android:title="@string/menu_home" >
+            </item>
+        </menu>
+    </item>
+    <item android:title="Ayuda">
+        <menu>
+            <item
+                android:id="@+id/nav_comentario"
+                android:icon="@drawable/ic_menu_comentario"
+                android:title="@string/menu_comentario">
+            </item>
+        </menu>
+    </item>
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_comentario"
-            android:icon="@drawable/ic_menu_comentario"
-            android:title="@string/menu_comentario" />
-    </group>
+
 </menu>
