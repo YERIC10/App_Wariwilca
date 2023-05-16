@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.app_wariwilca.MainActivity;
-import com.example.app_wariwilca.R;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
