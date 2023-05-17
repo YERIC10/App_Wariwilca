@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.app_wariwilca.DatoMuseo;
+import com.example.app_wariwilca.DetalleObjetoMuseo;
 import com.example.app_wariwilca.R;
 import com.example.app_wariwilca.databinding.FragmentHomeBinding;
 import com.google.firebase.storage.FirebaseStorage;
@@ -132,7 +132,7 @@ public class Home extends Fragment implements View.OnClickListener {
         }
 
         // LLAMAMOS A LA CLASE DATOS MUSEO Y ENVIAMOS LOS DATOS OBTENIDOS
-        Intent i = new Intent(getActivity(), DatoMuseo.class);
+        Intent i = new Intent(getActivity(), DetalleObjetoMuseo.class);
         i.putExtra(IMGOBJETO, url_img_objeto);
         i.putExtra(INFORMACION_OBJETO, infor_objeto);
 
