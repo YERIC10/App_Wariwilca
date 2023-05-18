@@ -1,6 +1,7 @@
 package com.example.app_wariwilca;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,6 +13,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -38,14 +40,8 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 public class DetalleObjetoMuseo extends AppCompatActivity {
-    private static final String CARPETA_PRINCIPAL = "Wariwilca/";
-    private static final String CARPETA_IMAGEN = "ImagenesQR";
-    private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;
-
-    private static int REQUEST_CODE = 1;
     TextView txtDescrObjeto;
     TextView txtNombreObjeto;
-    OutputStream outputStream;
     ImageView imgObjetoMuseo, imgQr;
     Button bntDescargarQr;
 
@@ -53,13 +49,14 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
     String imgObjeto, informObjeto;
     FirebaseFirestore firestore;
 
+    BitmapDrawable bitmapDrawable;
+    Bitmap bitmap;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_objeto_museo);
-
         imgObjetoMuseo = findViewById(R.id.img_objetomuseo);
         imgQr = findViewById(R.id.img_qr_objeto);
         txtDescrObjeto = findViewById(R.id.txt_DescripOjeto);
@@ -69,14 +66,7 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
         bntDescargarQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Invocamos a la funcion para descargar la imagen Qr
-
-                if(ContextCompat.checkSelfPermission(DetalleObjetoMuseo.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
-                    GuardarQR();
-                }else{
-                    PermisoDenegado();
-                }
+                GuardarQR();
             }
         });
 
@@ -118,53 +108,39 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
                 });
     }
 
-    private void PermisoDenegado() {
-        ActivityCompat.requestPermissions(DetalleObjetoMuseo.this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
 
+    public void GuardarQR() {
+        bitmapDrawable = (BitmapDrawable) imgQr.getDrawable();
+        bitmap = bitmapDrawable.getBitmap();
+
+        FileOutputStream fileOutputStream = null;
+        File sdCard = Environment.getExternalStorageDirectory();
+        File Directory = new File(sdCard.getAbsolutePath()+"/Download");
+        Directory.mkdir();
+
+        String filname = String.format("%d.jpg", System.currentTimeMillis());
+        File outfile = new File(Directory, filname);
+
+        Toast.makeText(DetalleObjetoMuseo.this, "DESCARGADO", Toast.LENGTH_SHORT).show();
+
+        try {
+            fileOutputStream = new FileOutputStream(outfile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            intent.setData(Uri.fromFile(outfile));
+            sendBroadcast(intent);
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                GuardarQR();
-            } else {
-                Toast.makeText( DetalleObjetoMuseo.this, "Se requiere de permiso para guardar", Toast.LENGTH_LONG).show();
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    public void GuardarQR() {
-
-        Uri image;
-        ContentResolver contentResolver = getContentResolver();
-
-        if(Build.VERSION.SDK_INT >=  Build.VERSION_CODES.Q){
-            image = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
-        }else{
-            image = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        }
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, System.currentTimeMillis()+ ".jpg");
-        contentValues.put(MediaStore.Images.Media.MIME_TYPE, DIRECTORIO_IMAGEN);
-        Uri uri = contentResolver.insert(image, contentValues);
-
-        try{
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) imgQr.getDrawable();
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-
-            OutputStream outputStream = contentResolver.openOutputStream(Objects.requireNonNull(uri));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100,outputStream);
-            Objects.requireNonNull(outputStream);
-
-            Toast.makeText(DetalleObjetoMuseo.this, "Se Guardo Correctamente.", Toast.LENGTH_SHORT).show();
-
-        }catch (Exception e){
-            Toast.makeText(DetalleObjetoMuseo.this, "No se Guardo Correctamente.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
