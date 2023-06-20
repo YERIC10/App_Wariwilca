@@ -72,7 +72,7 @@
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="310dp"
             android:layout_marginTop="30dp"
             android:padding="30dp"
             android:background="@color/fondo2"
@@ -105,11 +105,12 @@
 
             <Button
                 android:id="@+id/btn_decargar_qr"
-                android:layout_width="49dp"
-                android:layout_height="36dp"
-                android:background="@color/white"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/style_btn"
                 android:drawableLeft="@drawable/ic_descarga"
-                android:layout_gravity="center|bottom">
+                android:layout_gravity="center|bottom"
+                app:backgroundTint="@null">
 
             </Button>
         </FrameLayout>

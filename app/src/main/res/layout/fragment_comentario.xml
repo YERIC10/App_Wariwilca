@@ -10,7 +10,7 @@
    <FrameLayout
        android:layout_width="320dp"
        android:layout_height="680dp"
-       android:background="#0D000000"
+       android:background="@color/fondo2"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintHorizontal_bias="0.495"
