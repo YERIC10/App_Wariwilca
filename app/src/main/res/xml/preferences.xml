@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Lenguaje Inclusivo">
+        <SwitchPreference
+            android:key="auditivo"
+            android:title="Auditivo"
+            android:defaultValue="14dp"
+            android:selectAllOnFocus="true"
+            android:summary="Para personas con discapacidad visual">
+
+        </SwitchPreference>
+    </PreferenceCategory>
+</PreferenceScreen>
