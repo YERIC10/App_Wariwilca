@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparente"></color>
+
+    <color name="ChatBot">#F44336</color>
+    <color name="fondo">#F47F30</color>
+    <color name="fondo2">#0D000000</color>
 </resources>
