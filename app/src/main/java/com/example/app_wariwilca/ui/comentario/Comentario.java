@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 public class Comentario extends Fragment{
-    private @NonNull FragmentComentarioBinding binding;
+    private FragmentComentarioBinding binding;
     String nombUsuario, comentario;
     EditText txtNombUsuario, txtComentario;
     Button btnGuardar;
@@ -51,7 +51,7 @@ public class Comentario extends Fragment{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             // PONER MENSAJE
-
+                            Toast.makeText(getActivity(),"Se Guardo Comentario", Toast.LENGTH_SHORT).show();
                         }
                     });
 
