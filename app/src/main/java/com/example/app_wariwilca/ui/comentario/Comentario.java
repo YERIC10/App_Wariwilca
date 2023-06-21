@@ -63,6 +63,8 @@ public class Comentario extends Fragment {
 
                 if (nombUsuario.isEmpty() || comentario.isEmpty()) {
                     Toast.makeText(getActivity(), "No se pueden guardar datos vacios", Toast.LENGTH_SHORT).show();
+                    progressBar_Comentario.setVisibility(View.INVISIBLE);
+                    btnGuardar.setVisibility(View.VISIBLE);
 
                 } else {
                     MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity());

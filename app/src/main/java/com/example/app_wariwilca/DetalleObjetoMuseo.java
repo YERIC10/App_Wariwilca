@@ -32,8 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class DetalleObjetoMuseo extends AppCompatActivity {
-    TextView txtDescrObjeto;
-    TextView txtNombreObjeto;
+    TextView txtDescrObjeto, txtNombreObjeto;
     ImageView imgObjetoMuseo, imgQr;
     Button bntDescargarQr;
 
@@ -44,7 +43,7 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
     BitmapDrawable bitmapDrawable;
     Bitmap bitmap;
 
-    ProgressBar progressBar_descr, progressBar_img;
+    ProgressBar progressBar_descr, progressBar_nomb;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,11 +58,11 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
 
         //PROGRESS BAR
         progressBar_descr = findViewById(R.id.progrees_Descrip);
-        progressBar_img = findViewById(R.id.progrees_img);
+        progressBar_nomb = findViewById(R.id.progrees_nomb);
 
         // Obtener el drawable actual del ProgressBar
         Drawable drawable_info = progressBar_descr.getIndeterminateDrawable();
-        Drawable drawable_qr = progressBar_img.getIndeterminateDrawable();
+        Drawable drawable_qr = progressBar_nomb.getIndeterminateDrawable();
 
         // Establecer el color del drawable (puedes cambiar el color según tus preferencias)
         drawable_info.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
@@ -81,25 +80,21 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
         informObjeto = i.getStringExtra(Home.INFORMACION_OBJETO);
 
         firestore = FirebaseFirestore.getInstance();
-
         Cargar_Datos();
-
     }
 
     public void Cargar_Datos() {
-        progressBar_img.setVisibility(View.VISIBLE);
+        progressBar_nomb.setVisibility(View.VISIBLE);
         progressBar_descr.setVisibility(View.VISIBLE);
-        // Obtenemos la imagen desde Firebase usando Glide
-        if (imgObjetoMuseo != null) {
 
+        // Obtenemos la imagen desde Firebase usando Glide
+        if (imgObjetoMuseo == null) {
+            Toast.makeText(DetalleObjetoMuseo.this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
+        } else {
             Glide.with(this)
                     .load(imgObjeto)
                     .into(imgObjetoMuseo);
-            progressBar_img.setVisibility(View.INVISIBLE);
-        } else {
-            Toast.makeText(DetalleObjetoMuseo.this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
         }
-
         // Obtenemos datos de Firebase de la coleccion "Informacion_Objetos" del campo "Descripcion" y "Nombre"
         firestore.collection("Informacion_Objetos").document(informObjeto).
                 get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -111,16 +106,14 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
                             txtNombreObjeto.setText(Nombre);
                             txtDescrObjeto.setText(descripcion);
                             progressBar_descr.setVisibility(View.INVISIBLE);
+                            progressBar_nomb.setVisibility(View.INVISIBLE);
                         } else {
                             Toast.makeText(DetalleObjetoMuseo.this, "No se encontro resultado", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 });
-
     }
-
-
     public void GuardarQR() {
 
         bitmapDrawable = (BitmapDrawable) imgQr.getDrawable();
@@ -151,7 +144,6 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
