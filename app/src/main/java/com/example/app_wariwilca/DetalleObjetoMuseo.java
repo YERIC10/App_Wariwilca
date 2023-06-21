@@ -1,30 +1,24 @@
 package com.example.app_wariwilca;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.app_wariwilca.ui.home.Home;
@@ -36,8 +30,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Objects;
 
 public class DetalleObjetoMuseo extends AppCompatActivity {
     TextView txtDescrObjeto;
@@ -52,6 +44,8 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
     BitmapDrawable bitmapDrawable;
     Bitmap bitmap;
 
+    ProgressBar progressBar_descr, progressBar_img;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +56,18 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
         txtDescrObjeto = findViewById(R.id.txt_DescripOjeto);
         txtNombreObjeto = findViewById(R.id.txt_NombreObjeto);
         bntDescargarQr = findViewById(R.id.btn_decargar_qr);
+
+        //PROGRESS BAR
+        progressBar_descr = findViewById(R.id.progrees_Descrip);
+        progressBar_img = findViewById(R.id.progrees_img);
+
+        // Obtener el drawable actual del ProgressBar
+        Drawable drawable_info = progressBar_descr.getIndeterminateDrawable();
+        Drawable drawable_qr = progressBar_img.getIndeterminateDrawable();
+
+        // Establecer el color del drawable (puedes cambiar el color según tus preferencias)
+        drawable_info.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
+        drawable_qr.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
 
         bntDescargarQr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,12 +87,15 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
     }
 
     public void Cargar_Datos() {
-
+        progressBar_img.setVisibility(View.VISIBLE);
+        progressBar_descr.setVisibility(View.VISIBLE);
         // Obtenemos la imagen desde Firebase usando Glide
         if (imgObjetoMuseo != null) {
+
             Glide.with(this)
                     .load(imgObjeto)
                     .into(imgObjetoMuseo);
+            progressBar_img.setVisibility(View.INVISIBLE);
         } else {
             Toast.makeText(DetalleObjetoMuseo.this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
         }
@@ -101,15 +110,19 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
                             String descripcion = documentSnapshot.getString("Descripcion");
                             txtNombreObjeto.setText(Nombre);
                             txtDescrObjeto.setText(descripcion);
+                            progressBar_descr.setVisibility(View.INVISIBLE);
                         } else {
                             Toast.makeText(DetalleObjetoMuseo.this, "No se encontro resultado", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
+
     }
 
 
     public void GuardarQR() {
+
         bitmapDrawable = (BitmapDrawable) imgQr.getDrawable();
         bitmap = bitmapDrawable.getBitmap();
 

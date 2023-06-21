@@ -67,6 +67,27 @@
 
             </TextView>
 
+            <ProgressBar
+                android:id="@+id/progrees_Descrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="110dp"
+                style="?android:attr/progressBarStyle"
+                android:visibility="invisible">
+            </ProgressBar>
+
+            <ProgressBar
+                android:id="@+id/progrees_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120dp"
+                android:layout_gravity="center|top"
+                style="?android:attr/progressBarStyle"
+                android:visibility="invisible">
+
+            </ProgressBar>
+
         </FrameLayout>
 
         <FrameLayout

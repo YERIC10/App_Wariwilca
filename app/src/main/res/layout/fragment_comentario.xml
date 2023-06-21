@@ -11,6 +11,7 @@
        android:layout_width="320dp"
        android:layout_height="680dp"
        android:background="@color/fondo2"
+       android:padding="20dp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintHorizontal_bias="0.495"
@@ -19,7 +20,7 @@
 
       <TextView
           android:id="@+id/textView1"
-          android:layout_width="256dp"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center|top"
           android:layout_marginTop="50dp"
@@ -33,7 +34,7 @@
 
       <EditText
           android:id="@+id/txt_Nombre"
-          android:layout_width="258dp"
+          android:layout_width="match_parent"
           android:layout_height="50dp"
           android:layout_gravity="center|top"
           android:layout_marginTop="150dp"
@@ -46,9 +47,10 @@
 
       <EditText
           android:id="@+id/txt_Comentario"
-          android:layout_width="260dp"
-          android:layout_height="236dp"
+          android:layout_width="match_parent"
+          android:layout_height="300dp"
           android:layout_gravity="center"
+          android:layout_marginTop="40dp"
           android:gravity="end|left"
           android:hint="Ingrese su Comentario"
           android:scrollbars="vertical"
@@ -69,6 +71,16 @@
           app:backgroundTint="@null">
 
       </Button>
+
+      <ProgressBar
+          android:id="@+id/progressBar_comentario"
+          style="?android:attr/progressBarStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:visibility="invisible"
+          />
+
    </FrameLayout>
 
 

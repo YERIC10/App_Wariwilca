@@ -16,6 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:titleMarginStart="55pt"
+            app:titleTextColor="@color/white"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Button"
             app:popupTheme="@style/Theme.App_Wariwilca.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
