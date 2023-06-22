@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -55,6 +57,15 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
         txtDescrObjeto = findViewById(R.id.txt_DescripOjeto);
         txtNombreObjeto = findViewById(R.id.txt_NombreObjeto);
         bntDescargarQr = findViewById(R.id.btn_decargar_qr);
+
+        // la implementacion de ActionBar
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //APARICION DEL BOTON RETROCESO
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //QUITAMOS EL NOMBRE DEL ACTIVITY
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
         //PROGRESS BAR
         progressBar_descr = findViewById(R.id.progrees_Descrip);
@@ -147,5 +158,15 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // FUNCION DEL Boton de retroceso en el activity hacie el anterior
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
