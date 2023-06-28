@@ -10,5 +10,10 @@
         android:name="com.example.app_wariwilca.ui.home.Home"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_comentario"
+        android:name="com.example.app_wariwilca.ui.comentario.Comentario"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_comentario" />
 
 </navigation>

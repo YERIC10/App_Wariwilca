@@ -1,30 +1,26 @@
 package com.example.app_wariwilca;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.app_wariwilca.ui.home.Home;
@@ -36,12 +32,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Objects;
 
 public class DetalleObjetoMuseo extends AppCompatActivity {
-    TextView txtDescrObjeto;
-    TextView txtNombreObjeto;
+    TextView txtDescrObjeto, txtNombreObjeto;
     ImageView imgObjetoMuseo, imgQr;
     Button bntDescargarQr;
 
@@ -51,6 +44,8 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
 
     BitmapDrawable bitmapDrawable;
     Bitmap bitmap;
+
+    ProgressBar progressBar_descr, progressBar_nomb;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -62,6 +57,27 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
         txtDescrObjeto = findViewById(R.id.txt_DescripOjeto);
         txtNombreObjeto = findViewById(R.id.txt_NombreObjeto);
         bntDescargarQr = findViewById(R.id.btn_decargar_qr);
+
+        // la implementacion de ActionBar
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //APARICION DEL BOTON RETROCESO
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //QUITAMOS EL NOMBRE DEL ACTIVITY
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
+
+        //PROGRESS BAR
+        progressBar_descr = findViewById(R.id.progrees_Descrip);
+        progressBar_nomb = findViewById(R.id.progrees_nomb);
+
+        // Obtener el drawable actual del ProgressBar
+        Drawable drawable_info = progressBar_descr.getIndeterminateDrawable();
+        Drawable drawable_qr = progressBar_nomb.getIndeterminateDrawable();
+
+        // Establecer el color del drawable (puedes cambiar el color según tus preferencias)
+        drawable_info.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
+        drawable_qr.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
 
         bntDescargarQr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,22 +91,21 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
         informObjeto = i.getStringExtra(Home.INFORMACION_OBJETO);
 
         firestore = FirebaseFirestore.getInstance();
-
         Cargar_Datos();
-
     }
 
     public void Cargar_Datos() {
+        progressBar_nomb.setVisibility(View.VISIBLE);
+        progressBar_descr.setVisibility(View.VISIBLE);
 
         // Obtenemos la imagen desde Firebase usando Glide
-        if (imgObjetoMuseo != null) {
+        if (imgObjetoMuseo == null) {
+            Toast.makeText(DetalleObjetoMuseo.this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
+        } else {
             Glide.with(this)
                     .load(imgObjeto)
                     .into(imgObjetoMuseo);
-        } else {
-            Toast.makeText(DetalleObjetoMuseo.this, "Error al cargar la Imagen", Toast.LENGTH_SHORT).show();
         }
-
         // Obtenemos datos de Firebase de la coleccion "Informacion_Objetos" del campo "Descripcion" y "Nombre"
         firestore.collection("Informacion_Objetos").document(informObjeto).
                 get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -101,15 +116,17 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
                             String descripcion = documentSnapshot.getString("Descripcion");
                             txtNombreObjeto.setText(Nombre);
                             txtDescrObjeto.setText(descripcion);
+                            progressBar_descr.setVisibility(View.INVISIBLE);
+                            progressBar_nomb.setVisibility(View.INVISIBLE);
                         } else {
                             Toast.makeText(DetalleObjetoMuseo.this, "No se encontro resultado", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
     }
-
-
     public void GuardarQR() {
+
         bitmapDrawable = (BitmapDrawable) imgQr.getDrawable();
         bitmap = bitmapDrawable.getBitmap();
 
@@ -138,9 +155,18 @@ public class DetalleObjetoMuseo extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // FUNCION DEL Boton de retroceso en el activity hacie el anterior
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,79 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
     tools:context=".DetalleObjetoMuseo">
 
-    <ImageView
-        android:id="@+id/img_objetomuseo"
-        android:layout_width="229dp"
-        android:layout_height="161dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="45dp">
 
-    </ImageView>
+        <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
+            android:padding="30dp"
+            android:background="@color/fondo2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/img_objetomuseo"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txt_NombreObjeto"
-        android:layout_width="183dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_objetomuseo">
+            </ImageView>
 
-    </TextView>
+            <TextView
+                android:id="@+id/txt_NombreObjeto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_objetomuseo">
 
-    <TextView
-        android:id="@+id/txt_DescripOjeto"
-        android:layout_width="304dp"
-        android:layout_height="162dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_NombreObjeto">
+            </TextView>
 
-    </TextView>
+            <TextView
+                android:id="@+id/txt_DescripOjeto"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="60dp"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_NombreObjeto">
 
-    <ImageView
-        android:id="@+id/img_qr_objeto"
-        android:layout_width="123dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_DescripOjeto">
+            </TextView>
 
-    </ImageView>
+            <ProgressBar
+                android:id="@+id/progrees_Descrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="110dp"
+                style="?android:attr/progressBarStyle"
+                android:visibility="invisible">
+            </ProgressBar>
 
-    <Button
-        android:id="@+id/btn_decargar_qr"
-        android:layout_width="49dp"
-        android:layout_height="36dp"
-        android:background="@color/white"
-        android:drawableLeft="@drawable/ic_descarga"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_qr_objeto"
-        app:layout_constraintVertical_bias="0.173">
+            <ProgressBar
+                android:id="@+id/progrees_nomb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                style="?android:attr/progressBarStyle"
+                android:visibility="invisible">
 
-    </Button>
+            </ProgressBar>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:layout_marginTop="30dp"
+            android:padding="30dp"
+            android:background="@color/fondo2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Descargar QR"
+                android:textColor="@color/white"
+                android:gravity="center">
+
+            </TextView>
+            <ImageView
+                android:id="@+id/img_qr_objeto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center|top"
+                android:src="@drawable/qr_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </ImageView>
+
+            <Button
+                android:id="@+id/btn_decargar_qr"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/style_btn"
+                android:drawableLeft="@drawable/ic_descarga"
+                android:layout_gravity="center|bottom"
+                app:backgroundTint="@null">
+
+            </Button>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

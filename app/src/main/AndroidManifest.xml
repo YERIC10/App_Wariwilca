@@ -3,8 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera.ar"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -33,6 +40,10 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.App_Wariwilca.NoActionBar" />
+
+        <!-- Aplicación "AR Required", requiere "Google Play Services for AR" (ARCore)
+               para ser instalado, ya que la aplicación no incluye ninguna característica que no sea AR. -->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
     </application>
 
 </manifest>

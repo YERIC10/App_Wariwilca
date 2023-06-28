@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.Home">
+    tools:context=".ui.home.Home"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
 
     <!-- CARGADOR DE IMAGEN -->
 
@@ -178,6 +180,4 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageButton>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

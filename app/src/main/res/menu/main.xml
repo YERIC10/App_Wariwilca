@@ -2,11 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-
-        android:id="@+id/btn_login"
+        android:id="@+id/item_Login"
         android:title="Inicio Sesion"
         android:icon="@drawable/ic_login_user"
         app:showAsAction="always">
-
+    </item>
+    <item
+        android:id="@+id/item_Ajustes"
+        android:title="Ajustes">
+    </item>
+    <item
+        android:id="@+id/item_CerrarSesion"
+        android:title="Cerrar Sesion">
     </item>
 </menu>
