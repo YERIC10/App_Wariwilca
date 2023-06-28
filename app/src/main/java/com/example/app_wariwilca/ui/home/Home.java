@@ -35,6 +35,8 @@ public class Home extends Fragment implements View.OnClickListener {
     //VARIABLES PARA OBTENER DATOS DE LOS OBJETOS
     String url_img_objeto, infor_objeto;
 
+    //Anuncio
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -55,6 +57,10 @@ public class Home extends Fragment implements View.OnClickListener {
         btnCentroTop = root.findViewById(R.id.btn_CentroTop);   btnCentroTop.setOnClickListener(this);
         btnCentroEnd = root.findViewById(R.id.btn_CentroEnd);   btnCentroEnd.setOnClickListener(this);
         btnCentro = root.findViewById(R.id.btn_Centro);         btnCentro.setOnClickListener(this);
+
+
+        // Anuncio
+
 
         Cargar_Plano();
         return root;
