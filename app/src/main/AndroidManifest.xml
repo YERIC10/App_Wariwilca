@@ -41,9 +41,6 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.App_Wariwilca.NoActionBar" />
 
-        <!-- Aplicación "AR Required", requiere "Google Play Services for AR" (ARCore)
-               para ser instalado, ya que la aplicación no incluye ninguna característica que no sea AR. -->
-        <meta-data android:name="com.google.ar.core" android:value="required" />
     </application>
 
 </manifest>
