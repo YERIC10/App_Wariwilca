@@ -7,6 +7,14 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/btn_desplegable"
+        android:layout_width="53dp"
+        android:layout_height="57dp"
+        android:padding="10px">
+
+    </ImageView>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +45,7 @@
         android:importantForAccessibility="no" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/chatbot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
