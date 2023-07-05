@@ -4,10 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -31,6 +34,8 @@ import com.bumptech.glide.Glide;
 import com.example.app_wariwilca.databinding.ActivityMainBinding;
 import com.example.app_wariwilca.ui.Ajsutes.Ajustes;
 import com.example.app_wariwilca.ui.home.Home;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -119,6 +124,132 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        // TUTORIAL DE PRIMERA VEZ
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                final View view = findViewById(R.id.item_Login);
+                final View view1 = findViewById(R.id.scaner);
+                final View view2 = findViewById(R.id.chatbot);
+                final View view3 = findViewById(R.id.btn_desplegable);
+                final View view4 = findViewById(R.id.btn_Centro);
+                final Drawable menu = ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_menu_desplegable);
+                //Typeface prueba = Typeface.createFromAsset(getAssets(),"fonts/quicksand_medium.ttf");
+
+                NavigationView navigationView = binding.navView;
+                new TapTargetSequence(MainActivity.this)
+                        .targets(
+                                TapTarget.forView(view, "LOGIN", "Accede con tu cuenta de Gooogle")
+                                        .outerCircleColor(R.color.black)
+                                        .outerCircleAlpha(0.96f)
+                                        .targetCircleColor(R.color.fondo)
+                                        .titleTextSize(20)
+                                        .titleTextColor(R.color.fondo)
+                                        .descriptionTextSize(15)
+                                        .descriptionTextColor(R.color.black)
+                                        .textColor(R.color.white)
+                                        .textTypeface(Typeface.SANS_SERIF)
+                                        .dimColor(R.color.white)
+                                        .drawShadow(true)
+                                        .cancelable(true)
+                                        .tintTarget(true)
+                                        .transparentTarget(true)
+                                        .targetRadius(60),
+                                TapTarget.forView(view1, "SCANNER", "Aqui puedes escanear cualquir objeto")
+                                        .outerCircleColor(R.color.black)
+                                        .outerCircleAlpha(0.96f)
+                                        .targetCircleColor(R.color.fondo)
+                                        .titleTextSize(20)
+                                        .titleTextColor(R.color.fondo)
+                                        .descriptionTextSize(15)
+                                        .descriptionTextColor(R.color.black)
+                                        .textColor(R.color.white)
+                                        .textTypeface(Typeface.SANS_SERIF)
+                                        .dimColor(R.color.white)
+                                        .drawShadow(true)
+                                        .cancelable(false)
+                                        .tintTarget(true)
+                                        .transparentTarget(true)
+                                        .targetRadius(60),
+                                TapTarget.forView(view2, "CHAT BOT", "Por aqui te podremos ayudar si tienes un problema con el Aplicativo")
+                                        .outerCircleColor(R.color.black)
+                                        .outerCircleAlpha(0.96f)
+                                        .targetCircleColor(R.color.fondo)
+                                        .titleTextSize(20)
+                                        .titleTextColor(R.color.fondo)
+                                        .descriptionTextSize(15)
+                                        .descriptionTextColor(R.color.black)
+                                        .textColor(R.color.white)
+                                        .textTypeface(Typeface.SANS_SERIF)
+                                        .dimColor(R.color.white)
+                                        .drawShadow(true)
+                                        .cancelable(false)
+                                        .tintTarget(true)
+                                        .transparentTarget(true)
+                                        .targetRadius(60),
+
+                                TapTarget.forView(view4, "MAPA DEL MUSEO", "Puedes hacer click en cualquier 'Aréa' de imagen" +
+                                                " para obtener mejor informacion detallada ")
+                                        .outerCircleColor(R.color.black)
+                                        .outerCircleAlpha(0.96f)
+                                        .targetCircleColor(R.color.fondo)
+                                        .titleTextSize(20)
+                                        .titleTextColor(R.color.fondo)
+                                        .descriptionTextSize(15)
+                                        .descriptionTextColor(R.color.black)
+                                        .textColor(R.color.white)
+                                        .textTypeface(Typeface.SANS_SERIF)
+                                        .dimColor(R.color.white)
+                                        .drawShadow(true)
+                                        .cancelable(false)
+                                        .tintTarget(true)
+                                        .transparentTarget(true)
+                                        .targetRadius(60),
+
+                                TapTarget.forView(view3, "ADEMAS", "Te brindamos otras opciones disponibles")
+                                        .outerCircleColor(R.color.black)
+                                        .outerCircleAlpha(0.96f)
+                                        .targetCircleColor(R.color.fondo)
+                                        .titleTextSize(20)
+                                        .titleTextColor(R.color.fondo)
+                                        .descriptionTextSize(15)
+                                        .descriptionTextColor(R.color.black)
+                                        .textColor(R.color.white)
+                                        .textTypeface(Typeface.SANS_SERIF)
+                                        .dimColor(R.color.white)
+                                        .drawShadow(true)
+                                        .cancelable(false)
+                                        .tintTarget(true)
+                                        .transparentTarget(true)
+                                        .targetRadius(60)
+                                        .icon(menu)
+                        ).listener(new TapTargetSequence.Listener() {
+                            @Override
+                            public void onSequenceFinish() {
+
+                            }
+
+                            @Override
+                            public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+
+                            }
+
+                            @Override
+                            public void onSequenceCanceled(TapTarget lastTarget) {
+
+                            }
+                        }).start();
+            }
+        });
+        return  true;
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
 
@@ -249,11 +380,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        btnLogin = menu.findItem(R.id.item_Login);
-        return true;
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

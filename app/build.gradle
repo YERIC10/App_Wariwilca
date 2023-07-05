@@ -63,4 +63,7 @@ dependencies {
     //ANUNCIO
     implementation 'com.google.android.gms:play-services-ads:22.1.0'
 
+    //
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
+
 }
