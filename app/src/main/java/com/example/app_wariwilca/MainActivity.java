@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-
         getMenuInflater().inflate(R.menu.main, menu);
+        btnLogin = menu.findItem(R.id.item_Login);
         // TUTORIAL DE PRIMERA VEZ
 
         new Handler().post(new Runnable() {
