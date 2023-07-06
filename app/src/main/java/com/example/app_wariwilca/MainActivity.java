@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         btnLogin = menu.findItem(R.id.item_Login);
         // TUTORIAL DE PRIMERA VEZ
-
         new Handler().post(new Runnable() {
             @Override
             public void run() {
